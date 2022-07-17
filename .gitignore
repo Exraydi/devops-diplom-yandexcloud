@@ -5,6 +5,8 @@
 *.tfstate
 *.tfstate.*
 key.json
+backend.conf
+
 # Crash log files
 crash.log
 
