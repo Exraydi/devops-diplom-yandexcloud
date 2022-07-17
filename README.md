@@ -152,6 +152,23 @@ deploy-job:
  ![](scrin/15.jpg)
  ![](scrin/16.jpg)
 
+---
+
+### Удаление инфраструктуры 
+
+- Работу по удалению инфратсруктуры выполняет скрип destroy.sh
+
+```
+#! /usr/bin/bash
+echo "============ Destroy infrastructure ============"
+cd stage || return
+terraform destroy --auto-approve
+
+echo "============ Destroy S3 backend ============"
+cd ../s3_init || return
+terraform destroy --auto-approve
+
+```
 
 ---
 ## Что необходимо для сдачи задания?
