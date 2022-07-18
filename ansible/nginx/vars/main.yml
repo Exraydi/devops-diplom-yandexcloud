@@ -1,0 +1,4 @@
+ansible_user: ubuntu
+letsencrypt_email: exraydi@exraydi.ru
+domain_name: exraydi.ru
+domain_names: exraydi.ru,www.exraydi.ru,grafana.exraydi.ru,prometheus.exraydi.ru,alertmanager.exraydi.ru,gitlab.exraydi.ru

@@ -1,0 +1,61 @@
+---
+- hosts: exraydi.ru
+  become: yes
+  become_user: root
+  remote_user: ubuntu
+  roles:
+  - nginx
+  - node-exporter
+
+- hosts: db01.exraydi.ru
+  become: yes
+  become_user: root
+  remote_user: ubuntu
+  roles:
+  - mysql
+  - node-exporter
+
+- hosts: db02.exraydi.ru
+  become: yes
+  become_user: root
+  remote_user: ubuntu
+  roles:
+  - mysql
+  - node-exporter
+
+- hosts: wordpress
+  become: yes
+  become_user: root
+  remote_user: ubuntu
+  roles:
+  - wordpress
+  - node-exporter
+
+- hosts: gitlab.exraydi.ru
+  become: yes
+  become_user: root
+  remote_user: ubuntu
+  roles:
+  - gitlab
+  - node-exporter
+  environment:
+    GITLAB_ROOT_PASSWORD: "{{ gitlab_initial_root_password }}"
+    GITLAB_SHARED_RUNNERS_REGISTRATION_TOKEN: "{{ gitlab_runners_registration_token }}"
+
+- hosts: runner.exraydi.ru
+  become: yes
+  become_user: root
+  remote_user: ubuntu
+  roles:
+  - runner
+  - node-exporter
+
+- hosts: monitoring
+  become: yes
+  become_user: root
+  remote_user: ubuntu
+  roles:
+  - prometheus
+  - alertmanager
+  - node-exporter
+  - grafana

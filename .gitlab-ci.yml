@@ -1,0 +1,19 @@
+---
+before_script:
+  - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
+  - eval $(ssh-agent -s)
+  - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | s
+  - mkdir -p ~/.ssh
+  - chmod 700 ~/.ssh
+
+stages:
+  - deploy
+
+deploy-job:
+  stage: deploy
+  script:
+    - echo "Deploy"
+    - ssh -o StrictHostKeyChecking=no ubuntu@app.exraydi.ru sudo chown ubuntu /var/www/www.exraydi.ru/wordpress/ -R
+    - rsync -rvz -e "ssh -o StrictHostKeyChecking=no" ./* ubuntu@app.exraydi.ru:/var/www/www.exraydi.ru/wordpress/
+    - ssh -o StrictHostKeyChecking=no ubuntu@app.exraydi.ru rm -rf /var/www/www.exraydi.ru/wordpress/.git
+    - ssh -o StrictHostKeyChecking=no ubuntu@app.exraydi.ru sudo chown www-data /var/www/www.exraydi.ru/wordpress/ -R

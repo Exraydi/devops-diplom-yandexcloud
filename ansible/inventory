@@ -1,0 +1,17 @@
+[nginx]
+exraydi.ru
+[wordpress]
+app.exraydi.ru
+[mysql]
+db01.exraydi.ru mysql_server_id=1 mysql_replication_role=master
+db02.exraydi.ru mysql_server_id=2 mysql_replication_role=slave
+[monitoring]
+monitoring.exraydi.ru
+[gitlab]
+gitlab.exraydi.ru
+[runner]
+runner.exraydi.ru
+
+
+[all:vars]
+ansible_ssh_common_args= "-o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -J ubuntu@exraydi.ru"
