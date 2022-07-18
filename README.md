@@ -4,7 +4,7 @@
 
    - Произведена регистрация нового домена exraydi.ru у регистратора nic.ru. 
    
-   - Перренастроены резолверы для домена exraydi.ru на DNS сервера YandexCloud. 
+   - Перенастроены резолверы для домена exraydi.ru на DNS сервера YandexCloud. 
       ns1.yandexcloud.net 
       ns2.yandexcloud.net
 
@@ -58,7 +58,7 @@ terraform init && terraform plan && terraform apply --auto-approve
 
 
  - Поднимаются 7 VM, все на основе образа ubuntu-2004-lts. VM nginx (exraydi.ru) - имеет внешний IP адрес, выданный YandexCloud.
- - Происходит автоматчиеская регистраця DNS записей в YandexCloud.
+ - Происходит автоматическая регистрация DNS записей в YandexCloud.
 
 
 ![](scrin/3.jpg)
@@ -121,7 +121,7 @@ deploy-job:
     - ssh -o StrictHostKeyChecking=no ubuntu@app.exraydi.ru sudo chown www-data /var/www/www.exraydi.ru/wordpress/ -R
 
 ```
-- Пробуем изменить содержиове файла index.php WordPress. 
+- Пробуем изменить содержимое файла index.php WordPress. 
 
  ![](scrin/9.jpg)
 
@@ -129,7 +129,7 @@ deploy-job:
 
  ![](scrin/10.jpg)
 
-- Проеряем результат на VM app.exraydi.ru.
+- Проверяем результат на VM app.exraydi.ru.
 
  ![](scrin/11.jpg)
 
@@ -156,7 +156,7 @@ deploy-job:
 
 ### Удаление инфраструктуры 
 
-- Работу по удалению инфратсруктуры выполняет скрип destroy.sh
+- Работу по удалению инфраструктуры выполняет скрип destroy.sh
 
 ```
 #! /usr/bin/bash
