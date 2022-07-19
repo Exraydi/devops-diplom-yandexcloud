@@ -2,15 +2,15 @@
 
 ### Регистрация доменного имени
 
-   - Произведена регистрация нового домена exraydi.ru у регистратора nic.ru. 
-   
-   - Перенастроены резолверы для домена exraydi.ru на DNS сервера YandexCloud. 
-      ns1.yandexcloud.net 
+   - Произведена регистрация нового домена exraydi.ru у регистратора nic.ru.
+
+   - Перенастроены резолверы для домена exraydi.ru на DNS сервера YandexCloud.
+      ns1.yandexcloud.net
       ns2.yandexcloud.net
 
 ### Создание инфраструктуры
 
-   - Секреты для разворачивания инфраструктуры хранятся в 2-х файлах (key.json, backend.conf). 
+   - Секреты для разворачивания инфраструктуры хранятся в 2-х файлах (key.json, backend.conf).
      Они включены в шаблон исключения .gitignore, для исключения случайной публикации.   
    - Работу по разворачиванию всех инфраструктуры выполняет скрипт create.sh
 
@@ -45,16 +45,16 @@ ansible-playbook playbook.yml
 cd s3_init/ || return
 terraform init && terraform plan && terraform apply --auto-approve
 ```
-![](scrin/1.jpg) 
+![](scrin/1.jpg)
 
-- Создаем workspace stage, и разворачиваем инфраструктуру: 
+- Создаем workspace stage, и разворачиваем инфраструктуру:
 
 ```
 terraform init -reconfigure -backend-config=./backend.conf
 terraform workspace new stage
 terraform init && terraform plan && terraform apply --auto-approve
 ```
-![](scrin/2.jpg) 
+![](scrin/2.jpg)
 
 
  - Поднимаются 7 VM, все на основе образа ubuntu-2004-lts. VM nginx (exraydi.ru) - имеет внешний IP адрес, выданный YandexCloud.
@@ -63,7 +63,7 @@ terraform init && terraform plan && terraform apply --auto-approve
 
 ![](scrin/3.jpg)
 
-- Далее, автоматически запускается настройка хостов с помощью команды 
+- Далее, автоматически запускается настройка хостов с помощью команды
   ansible-playbook playbook.yml
 
 ### Установка Nginx и LetsEncrypt
@@ -91,7 +91,7 @@ ok: [db02.exraydi.ru -> db01.exraydi.ru]
 
  ![](scrin/6.jpg)
 
-- Клонируем репозиторий WordPress, 
+- Клонируем репозиторий WordPress,
 
  ![](scrin/7.jpg)
  ![](scrin/8.jpg)
@@ -121,11 +121,11 @@ deploy-job:
     - ssh -o StrictHostKeyChecking=no ubuntu@app.exraydi.ru sudo chown www-data /var/www/www.exraydi.ru/wordpress/ -R
 
 ```
-- Пробуем изменить содержимое файла index.php WordPress. 
+- Пробуем изменить содержимое файла index.php WordPress.
 
  ![](scrin/9.jpg)
 
-- При выполнении commit запускается deploy 
+- При выполнении commit запускается deploy
 
  ![](scrin/10.jpg)
 
@@ -154,7 +154,7 @@ deploy-job:
 
 ---
 
-### Удаление инфраструктуры 
+### Удаление инфраструктуры
 
 - Работу по удалению инфраструктуры выполняет скрип destroy.sh
 
@@ -176,9 +176,9 @@ terraform destroy --auto-approve
 1. Репозиторий со всеми Terraform манифестами и готовность продемонстрировать создание всех ресурсов с нуля.
 2. Репозиторий со всеми Ansible ролями и готовность продемонстрировать установку всех сервисов с нуля.
 3. Скриншоты веб-интерфейсов всех сервисов работающих по HTTPS на вашем доменном имени.
-- `https://www.podkovka.ru.net` (WordPress)
-- `https://gitlab.podkovka.ru.net` (Gitlab)
-- `https://grafana.podkovka.ru.net` (Grafana)
-- `https://prometheus.podkovka.ru.net` (Prometheus)
-- `https://alertmanager.podkovka.ru.net` (Alert Manager)
+- `https://www.exraydi.ru` (WordPress)
+- `https://gitlab.exraydi.ru` (Gitlab)
+- `https://grafana.exraydi.ru` (Grafana)
+- `https://prometheus.exraydi.ru` (Prometheus)
+- `https://alertmanager.exraydi.ru` (Alert Manager)
 4. Все репозитории рекомендуется хранить на одном из ресурсов ([github.com](https://github.com) или [gitlab.com](https://gitlab.com)).
